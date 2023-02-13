@@ -118,12 +118,13 @@ class Schema{
                 let params = adminData;
                 let result1 = await new Promise((resolve,reject)=>{
                     this.conn.query(sql,params,(error,data)=>{
-                        if(error) reject({error,message:`Data not inserted into ${table1}, check the error object`});
-                        resolve({data:data,message:`Data inserted into ${table1} successfully `})
+                        if(error) reject(`Data not inserted into ${table1}, check the error object`);
+                        resolve(`Data inserted into ${table1} successfully `)
                     })
                 })
 
-                finalResult+ result1;
+                finalResult+= result1;
+                console.log(finalResult);
                 resolve(finalResult);
                 tempConn.release();
             })

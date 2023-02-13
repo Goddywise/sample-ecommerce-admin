@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {createTables} = require('../controller/dbController');
+const {createTables,initializeTables} = require('../controller/dbController');
 
 
 router.get('/create-tables',async(req,res)=>{
@@ -8,6 +8,10 @@ router.get('/create-tables',async(req,res)=>{
     res.send({data});
 })
 
+router.get('/initialize-tables',async(req,res)=>{
+    data = await initializeTables();
+    res.send({data});
+})
 
 
 
