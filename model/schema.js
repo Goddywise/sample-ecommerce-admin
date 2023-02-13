@@ -24,7 +24,7 @@ class Schema{
         if(this.dropTables){
             return new Promise((resolve,reject)=>{
                  this.conn.getConnection(async(err,tempConn)=>{
-                    if(err) throw err;
+                    if(err) reject(err);
                     sql = `SHOW TABLES`;
                     let result =await new Promise((resolve,reject)=>{
                         this.conn.query(sql,(err,data)=>{
@@ -81,7 +81,7 @@ class Schema{
         let result;
         return new Promise((resolve,reject)=>{
                 this.conn.getConnection(async (err,tempConn)=>{
-                if(err) throw err;
+                if(err) reject(err);
                 sql = `CREATE TABLE ${table1} (id int AUTO_INCREMENT, username VARCHAR(255), password TEXT, PRIMARY KEY(id))`;
                 result = await new Promise((resolve,reject)=>{
                     this.conn.query(sql,(err,data)=>{
@@ -104,8 +104,31 @@ class Schema{
                 resolve(finalResult);
             })
         })
-        
+    }
 
+    InitializeTables = ()=>{
+        let sql = ``;
+        let finalResult = ``;
+        
+        return new Promise((resolve,reject)=>{
+            this.conn.getConnection(async (err,tempConn)=>{
+                if(err) reject(err) ;
+                const adminData = ['goddywise@gmail.com','12345'];
+                sql = `INSERT INTO ${table1} (username,password) VALUES(?,?);`;
+                let params = adminData;
+                let result1 = await new Promise((resolve,reject)=>{
+                    this.conn.query(sql,params,(error,data)=>{
+                        if(error) reject({error,message:`Data not inserted into ${table1}, check the error object`});
+                        resolve({data:data,message:`Data inserted into ${table1} successfully `})
+                    })
+                })
+
+                finalResult+ result1;
+                resolve(finalResult);
+                tempConn.release();
+            })
+            
+        })
     }
 
 
