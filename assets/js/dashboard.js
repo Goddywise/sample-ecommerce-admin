@@ -1,4 +1,4 @@
-// const data = [
+//\const data = [
 //         {
 //             id:1,
 //             name:"Six Pairs-in-1 Quality Ankle Socks",

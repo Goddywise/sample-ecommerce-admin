@@ -47,7 +47,7 @@ form > div:nth-child(2) > span{
     right:10px;
     top:0px;
     color:var(--site-pink);
-    z-index: 1;
+    /* z-index: 1; */
     cursor: pointer;
     height:40px;
     width:40px;

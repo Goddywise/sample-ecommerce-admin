@@ -10,8 +10,4 @@ router.get('/create-tables',async(req,res)=>{
     // .catch(err => res.send({err}))
 })
 
-
-
-
-
 module.exports = router;
