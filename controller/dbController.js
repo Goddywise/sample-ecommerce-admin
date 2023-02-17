@@ -18,7 +18,6 @@ const initializeTables = ()=>{
     })
 }
 
-
 module.exports = {
     createTables,
     initializeTables

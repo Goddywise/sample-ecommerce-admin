@@ -13,12 +13,12 @@
     <main>
         <div>
             <h1>Admin Login Page</h1>
-            <form>
+            <form onsubmit="handleSubmit(event)">
                 <div>
-                   <input type="text" placeholder="Enter Username" /> 
+                   <input type="text" id="username" placeholder="Enter Username" required /> 
                 </div>
                 <div>
-                    <input type="password" placeholder="Enter Password"/>
+                    <input type="password" id="password" placeholder="Enter Password" required/>
                     <span>
                         <i class="bi-eye"></i>
                         <i class="bi-eye-slash"></i>

@@ -10,7 +10,7 @@ router.get('/dasboard',(req,res)=>{
         })
     })
     const home = new Promise((resolve,rejects)=>{
-        readFile('./public/views/home.html','utf-8',(err,data)=>{
+        readFile('./public/views/dashboard.html','utf-8',(err,data)=>{
             if(err) rejects(err);
             resolve(data);
         })

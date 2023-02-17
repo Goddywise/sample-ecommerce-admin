@@ -14,6 +14,4 @@ router.get('/initialize-tables',async(req,res)=>{
 })
 
 
-
-
 module.exports = router;

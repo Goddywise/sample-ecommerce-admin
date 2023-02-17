@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 //const middleware = require('./middleware/index');
 const homeRoutes = require('./routes/homeRoutes');
 const dbRoutes = require('./routes/dbRoutes');
+const productRoutes = require("./routes/productRoutes");
+const loginRoutes = require('./routes/loginRoutes');
 const app = express();
 
 app.use([express.static(__dirname),cors(),bodyParser.json()]);
@@ -12,6 +14,8 @@ app.use([express.static(__dirname),cors(),bodyParser.json()]);
 
 app.use('/',homeRoutes);
 app.use('/db',dbRoutes);
+app.use("/products",productRoutes);
+app.use('/login',loginRoutes);
 app.all('*',(req,res)=>{
     res.status(404).send('page not found')
 })

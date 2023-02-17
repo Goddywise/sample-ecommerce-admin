@@ -21,3 +21,18 @@ eyeBtn.onclick = ()=>{
     }
 }
 
+const handleSubmit = async(e)=>{
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    e.preventDefault();
+    let res = await fetch(`/login/submit`,{
+        method:"POST",
+        headers:{
+            "Content-Type":"Application/json"
+        },
+        body:JSON.stringify({username,password})
+    });
+    let data = await res.json();
+    console.log(data);
+
+}
