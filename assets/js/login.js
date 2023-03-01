@@ -34,5 +34,11 @@ const handleSubmit = async(e)=>{
     });
     let data = await res.json();
     console.log(data);
-
+    if(data.isSuccessful){
+        alert(data.message);
+        localStorage.setItem('usr',username);
+        location.href= '/dashboard';
+        return false
+    }
+    alert(data.message?data.message:"An error occur try again later");
 }

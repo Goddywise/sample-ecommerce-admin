@@ -1,7 +1,7 @@
 const Crud= require('../model/crud');
 const dbCrud= new Crud();
 
-const getAllRecords = (table)=>{
+const getAllProducts = (table)=>{
     return new Promise((resolve,rejects)=>{
          dbCrud.ReadAll(table)
          .then(data => resolve(data))
@@ -10,8 +10,13 @@ const getAllRecords = (table)=>{
     })
 }
 
+const addProduct = (data,table)=>{
+    console.log(data);
+    return data;
+}
 
 
 module.exports = {
-    getAllRecords,
+    getAllProducts,
+    addProduct
 }

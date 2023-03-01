@@ -4,23 +4,26 @@ const table1 = 'admin_table';
 const table2 = 'user_table';
 const table3 = 'product_table';
 
-
-
 class Schema{
     constructor(){
         this.conn = mysql.createPool({
-            host: process.env.HOST,
-            user: process.env.USER,
-            password: process.env.PASSWORD,
+            // host: process.env.HOST,
+            host: 'localhost',
+            // user: process.env.USER,
+            user: 'root',
+            // password: process.env.PASSWORD,
+            password:'',
             // database:"eco_db",
             // port:"3308",
-            database:process.env.DATABASE,
-            port:process.env.DB_PORT,
-            connectionLimit: process.env.CONNECTIONLIMIT,
+            // database:process.env.DATABASE,
+            database:'firstdb',
+            // port:process.env.DB_PORT,
+            port:'3308',
+            // connectionLimit: process.env.CONNECTIONLIMIT,
+            connectionLimit:50,
         });
         this.dropTables = dropTables;
     }
-
     CreateTables = ()=>{
         let sql = '';
         let finalResult = ``;
@@ -117,7 +120,7 @@ class Schema{
                     })
                 });
                 finalResult+= result;
-
+//what's the code that direct us Secting from this below table, since we have many tables---According to readAll > crud.js
                 sql = `CREATE TABLE ${table3} (id int AUTO_INCREMENT,name VARCHAR(255), price int,discount int, image TEXT, description TEXT,rating int, total_left int, total_sold int, PRIMARY KEY(id))`;
                 result = await new Promise((resolve,reject)=>{
                     this.conn.query(sql,(err,data)=>{
@@ -135,7 +138,6 @@ class Schema{
             })
         })
     }
-
     InitializeTables = ()=>{
         let sql = ``;
         let finalResult = ``;
@@ -208,8 +210,6 @@ class Schema{
             
         })
     }
-
-
 }
 
 module.exports = Schema;

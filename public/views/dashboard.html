@@ -1,8 +1,78 @@
-<link rel="stylesheet" href="/assets/css/dashboard.html">
+<link rel="stylesheet" href="/assets/css/dashboard.css">
 <main>
-    <h1>dashboard</h1>
-</main>
-<aside>
+    <aside>
+        <div class="top-aside">
+            <div>
+                <span>GW</span>
+                <div>
+                    <span>Goddywise</span>
+                    <span>Admin</span>
 
-</aside>
+                </div>
+            </div>
+            <div>
+                <h3>WELCOME</h3>
+                <div>
+                    <a class="menu overview-link" onclick="showMenu(this,'.overview')"> <i class="bi-app"></i> Overview</a>
+                    <a class="menu product-link" onclick="showMenu(this,'.products')"> <i class="bi-gift" > </i> Products</a>
+                    <a class="menu order-link" onclick="showMenu(this,'.order')"> <i class="bi-cart cart-link">  </i> Order</a>
+                    <a class="menu search-link"onclick="showMenu(this,'.search')"> <i class="bi-search"> </i> Search</a>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-aside">
+           
+        </div>
+
+    </aside>
+    
+    <section class="mainContent">
+        <div class="subContent">
+            <div class="content  overview">Overview</div>
+            <div class="content products"> 
+                <h1>Add product</h1>
+                <form onsubmit="return handleAddProduct(event)" enctype="multipart/form-data">
+                    <label>
+                        Product Name<br/>
+                        <input required type="text" name="name" id="name" placeholder=""/>
+                        <br/><br/>
+                    </label>
+                    <label >
+                        Price<br/>
+                        <input required type="number" id="price"/>
+                        <br/><br/>
+                    </label>
+                    <label>
+                        Description<br/>
+                        <textarea required name="description" id="description" placeholder="Enter Product Description"></textarea>
+                        <br/><br/>
+                    </label>
+                    <label>
+                        Discount<br/>
+                        <input type="number" id="discount"/>
+                        <br/><br/>
+                    </label>
+                    <div>
+                        <img />
+                    </div>
+                    <label>
+                        Select File<br/>
+                        <input required type="file" accept="image/*" id="image"/>
+                        <br/><br/>
+                    </label>
+                    <label>
+                        Total Number of product to add <br/>
+                        <input required type="number" id="total" name=""/>
+                        <br/><br/>
+                    </label>
+                    <button id="submit" type="submit">Upload</button>
+                </form>
+            </div>
+            <div class="content  order">Order</div>
+            <div class="content search">Search</div>
+        </div>
+        
+    </section>
+</main>
+
 <script src="/assets/js/dashboard.js"></script>

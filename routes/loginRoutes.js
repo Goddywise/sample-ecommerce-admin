@@ -5,13 +5,9 @@ const {getAdminDetails}  = require('../controller/loginController')
 router.post('/submit',async(req,res)=>{
     const {username,password} = req.body;
     let data = await getAdminDetails(username,password);
-    res.send({data});
+    res.send(data);
 
 });
-
-
-
-
 
 
 

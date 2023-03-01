@@ -1,6 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+// const multer = require('multer');
+// const upload = multer({dest:"assets/uploads/"})
+
 
 //const middleware = require('./middleware/index');
 const homeRoutes = require('./routes/homeRoutes');
@@ -9,7 +12,7 @@ const productRoutes = require("./routes/productRoutes");
 const loginRoutes = require('./routes/loginRoutes');
 const app = express();
 
-app.use([express.static(__dirname),cors(),bodyParser.json()]);
+app.use([express.static(__dirname),cors(),bodyParser.json(),express.urlencoded({extended:true})]);
 //app.use('*',middleware);
 
 app.use('/',homeRoutes);
