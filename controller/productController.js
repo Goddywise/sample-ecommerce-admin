@@ -10,9 +10,13 @@ const getAllProducts = (table)=>{
     })
 }
 
-const addProduct = (data,table)=>{
-    console.log(data);
-    return data;
+const addProduct = (req,table)=>{
+    let obj = req.body;
+    return new Promise((resolve,rejects)=>{
+        dbCrud.AddNewProduct(obj,table)
+        .then(data => resolve(data))
+         .catch(err => rejects(err));
+    })
 }
 
 

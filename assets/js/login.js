@@ -33,7 +33,7 @@ const handleSubmit = async(e)=>{
         body:JSON.stringify({username,password})
     });
     let data = await res.json();
-    console.log(data);
+   console.log(data,username,password);
     if(data.isSuccessful){
         alert(data.message);
         localStorage.setItem('usr',username);

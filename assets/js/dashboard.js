@@ -17,6 +17,9 @@ const showMenu =(menuLink,content)=>{
  allMenu.forEach(eachMenu=>{
      eachMenu.classList.remove('active-link');
  })
+//   console.log(menuLink);
+//   console.log(content);
+//what the below if statement means-- if type of string which is pointing to     where the function is called, i.e --- 'overview-link', is a string data type--
  let menu;
  if(typeof menuLink === 'string'){
     menu = document.querySelector(`.${menuLink}`);
@@ -37,6 +40,9 @@ const validateInputs=(vals,msgs) =>{
        if(val == '' || val == null || typeof val == 'undefined' || val == 0){
           break;
        }
+       if(i == len-1){
+        status = true;
+       }
     }
     if(!status) {
       alert(msg);
@@ -53,15 +59,17 @@ const handleAddProduct = async (e)=>{
   let image = document.getElementById('image').files[0];
   let total = document.getElementById('total').value;
   console.log(total)
-  // let check = validateInputs(
-  //   [name,price,description,total],
-  //   [
-  //     'Please Enter Product Name',
-  //     'Please Enter Produce Price',
-  //     'Please Enter Product Description',
-  //     'Please Enter the Total Products'
-  //   ])
-  // if(!check) return false;
+  
+  let check = validateInputs(
+    [name,price,description,total],
+    [
+      'Please Enter Product Name',
+      'Please Enter Produce Price',
+      'Please Enter Product Description',
+      'Please Enter the Total Products'
+    ])
+
+  if(!check) return false;
   discount = discount?discount:0;
   const formData = new FormData();
   formData.append('name',name);
@@ -70,7 +78,7 @@ const handleAddProduct = async (e)=>{
   formData.append('image',image);
   formData.append('total',total);
   formData.append('discount',discount);
-  let res = await fetch(`/products/add-new-product`,{
+  let res = await fetch(`/products/add-new-product-2`,{
       method:"POST",
       body:formData
   })

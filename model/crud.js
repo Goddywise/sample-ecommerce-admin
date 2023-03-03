@@ -67,6 +67,36 @@ class Crud{
         })
 
     }
+    AddNewProduct = (obj,table)=>{
+        
+        const name = obj.name;
+        const image = obj.image;
+        const discount = obj.discount;
+        const total = obj.total;
+        const price = obj.price;
+        const description = obj.description;
+        return new Promise((resolve,reject)=>{
+                this.conn.getConnection(async (err,tempConn)=>{
+                if(err) reject(err) ;
+                let params;
+                let result;
+                const productData = [name,price,discount,image,description,'0',total,'0'];
+                const sql = `INSERT INTO ${table} (name,price,discount,image,description,rating,total_left,total_sold) VALUES(?,?);`;
+                params = productData;
+                result = await new Promise((resolve,reject)=>{
+                    this.conn.query(sql,params,(error,data)=>{
+                        if(error) reject(`Data not inserted into ${table}, check the error object`);
+                        resolve(`Data inserted into ${table} successfully `)
+                    })
+                })
+
+                tempConn.release();
+                resolve(result);            
+            })
+        })
+        
+
+    }
 }
                     
 

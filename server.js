@@ -12,7 +12,9 @@ const productRoutes = require("./routes/productRoutes");
 const loginRoutes = require('./routes/loginRoutes');
 const app = express();
 
-app.use([express.static(__dirname),cors(),bodyParser.json(),express.urlencoded({extended:true})]);
+app.use([express.static(__dirname),cors(),bodyParser.json(),
+    // express.urlencoded({extended:true})
+]);
 //app.use('*',middleware);
 
 app.use('/',homeRoutes);
