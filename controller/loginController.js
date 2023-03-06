@@ -4,7 +4,7 @@ const table = 'admin_table';
 
 const getAdminDetails = (username,password)=>{
     return new Promise((resolve,rejects)=>{
-        dbCrud.GetAdminDetails(table,username,password)
+        dbCrud.GetAdminInfo(table,username,password)
             .then((data) =>{ 
             if(data.length > 0){
                 resolve({message:"Login successful",status:200,isSuccessful:true})

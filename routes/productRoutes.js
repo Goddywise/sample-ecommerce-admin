@@ -1,12 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const multer = require('multer');
-const upload = multer({dest:"../assets/uploads/"});
 const {getAllProducts,addProduct} = require('../controller/productController');
 const formidable = require('formidable');
-const fs = require('fs');
+const fs= require('fs');
+const path = require('path');
 const { resolve } = require('path');
-
 const table = 'product_table';
 
 const uploadImageFile = async(req,res,next)=>{
@@ -19,7 +17,7 @@ const uploadImageFile = async(req,res,next)=>{
             let newName = Math.floor(Math.random()*10000000000000000)+'.'+files.image.originalFilename.split('.').at(-1);
             // .at (-1) is to get the of extention of an image
 
-            let newP = __dirname+'./../assets/upload/'+newName;
+            let newP = path.join(__dirname,'./../assets','images',newName);
             let result = await new Promise((resolve,reject)=>{
                     fs.rename(oldP,newP,function(err){
                     if(err) reject(err);
@@ -42,11 +40,6 @@ router.get('/get-all-products',async(req,res)=>{
     res.send({dta});
 })
 
-router.post('/add-new-product',upload.single("image"),async (req,res)=>{
-    const data = addProduct(req.body);
-    // console.log(data);
-    res.send({data});
-})
 
 router.post('/add-new-product-2',uploadImageFile,async(req,res)=>{  
     //console.log(req.body); 

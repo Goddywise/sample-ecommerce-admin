@@ -1,10 +1,10 @@
-// window.onload = ()=>{
-//     //alert('hello')
+window.onload = ()=>{
+    //alert('hello')
     
-//     // let user = localStorage.getItem('usr');
-//     // if(!user) location.href = '/';
-//     // localStorage.clear();
-// }
+    // let user = localStorage.getItem('usr');
+    // if(!user) location.href = '/';
+    //  localStorage.clear();
+}
 
 const showMenu =(menuLink,content)=>{
    let allContent = document.querySelectorAll('.content')
@@ -36,6 +36,7 @@ const validateInputs=(vals,msgs) =>{
     let msg = '';
     for(i = 0;i<len;i++){
        const val = vals[i];
+       //console.log(val)
        msg = msgs[i];
        if(val == '' || val == null || typeof val == 'undefined' || val == 0){
           break;
@@ -58,19 +59,20 @@ const handleAddProduct = async (e)=>{
   let discount = document.getElementById('discount').value;
   let image = document.getElementById('image').files[0];
   let total = document.getElementById('total').value;
-  console.log(total)
-  
+  //console.log(total)
+  //The below function called which is validateInputs,first parameter [name,price,description,total], represent vals while second parameter messages represent msgs at yhe top function-----note bote parameter are in array---
   let check = validateInputs(
     [name,price,description,total],
-    [
+ [
       'Please Enter Product Name',
       'Please Enter Produce Price',
       'Please Enter Product Description',
       'Please Enter the Total Products'
-    ])
-
+    ]
+    )
   if(!check) return false;
   discount = discount?discount:0;
+
   const formData = new FormData();
   formData.append('name',name);
   formData.append('price',price);

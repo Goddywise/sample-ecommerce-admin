@@ -27,17 +27,18 @@ class Schema{
     CreateTables = ()=>{
         let sql = '';
         let finalResult = ``;
-        if(this.dropTables){
-            return new Promise((resolve,reject)=>{
+                if(this.dropTables){
+                 return new Promise((resolve,reject)=>{
                  this.conn.getConnection(async(err,tempConn)=>{
                     if(err) reject(err);
                     sql = `SHOW TABLES`;
+                    
                     let result =await new Promise((resolve,reject)=>{
                         this.conn.query(sql,(err,data)=>{
                             if(err) reject(err);
                             resolve(data);
                         });
-                    });
+                });
                     //console.log(result);
                     if(result && this.dropTables){
                         sql = `SET FOREIGN_KEY_CHECKS = 0`;

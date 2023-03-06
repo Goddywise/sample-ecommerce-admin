@@ -24,6 +24,8 @@ class Crud{
     ReadAll = (tble)=>{
         let sql = '';
         let result;
+        //What is the value of ${tble} that we're selecting from----?
+        //SELECT all FROM ${tble} does it exist before--- e.g selecting from table1 while the table1 will be declare at the top----
         try{
             let rt  = new Promise((resolve,reject)=>{
                 this.conn.getConnection(async(err,tempConn)=>{
@@ -47,11 +49,12 @@ class Crud{
         }
         
     }
-    GetAdminDetails = (table,username,password)=>{
+    GetAdminInfo = (table,username,password)=>{
         let sql = '';
         let result;
-
-        return new Promise((resolve,reject)=>{this.conn.getConnection(async(err,tempConn)=>{
+//What is the value of ${table} that we're selecting from----?
+        return new Promise((resolve,reject)=>{
+                this.conn.getConnection(async(err,tempConn)=>{
                 if(err) reject(err);
                 sql = `SELECT username,password FROM ${table} WHERE username='${username}' AND password = '${password}' `;
                 result = await new Promise((resolve,reject)=>{
@@ -80,19 +83,20 @@ class Crud{
                 if(err) reject(err) ;
                 let params;
                 let result;
+                //I thougth array work with index, why productData scattered
                 const productData = [name,price,discount,image,description,'0',total,'0'];
-                const sql = `INSERT INTO ${table} (name,price,discount,image,description,rating,total_left,total_sold) VALUES(?,?);`;
+                const sql = `INSERT INTO ${table} (name,price,discount,image,description,rating,total_left,total_sold) VALUES(?,?,?,?,?,?,?,?);`;
                 params = productData;
                 result = await new Promise((resolve,reject)=>{
                     this.conn.query(sql,params,(error,data)=>{
-                        if(error) reject(`Data not inserted into ${table}, check the error object`);
-                        resolve(`Data inserted into ${table} successfully `)
+                        if(error) reject(`Error:${error} \n Data not inserted into ${table}, check the error object`);
+                        resolve({id:data.insertId,image:image,message:`product added successfully `})
                     })
                 })
 
                 tempConn.release();
                 resolve(result);            
-            })
+             })
         })
         
 
