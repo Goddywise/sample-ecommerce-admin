@@ -2,10 +2,12 @@ const express = require('express');
 const router = express.Router();
 const {getAllProducts,addProduct} = require('../controller/productController');
 const formidable = require('formidable');
+const multer = require('multer');
 const fs= require('fs');
 const path = require('path');
 const { resolve } = require('path');
 const table = 'product_table';
+
 
 const uploadImageFile = async(req,res,next)=>{
     const form = new formidable.IncomingForm();
@@ -35,13 +37,32 @@ const uploadImageFile = async(req,res,next)=>{
     next();
 }
 
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './assets/images')
+    },
+    filename: function (req, file, cb) {
+        console.log(file);
+        const uniquePrefix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        let nm =  uniquePrefix+'-'+file.originalname.replace(/ /g,'-'); 
+        req.body.image = nm;
+        cb(null, nm);
+        
+    }
+    })
+    
+    const upload = multer({ storage: storage })
+
+
+
+
 router.get('/get-all-products',async(req,res)=>{
     const dta = await getAllProducts(table);
     res.send({dta});
 })
 
 
-router.post('/add-new-product-2',uploadImageFile,async(req,res)=>{  
+router.post('/add-new-product-2',upload.single('image'),async(req,res)=>{  
     //console.log(req.body); 
     const data = await addProduct(req,table);
     res.send({data});

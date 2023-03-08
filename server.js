@@ -17,6 +17,8 @@ app.use([express.static(__dirname),cors(),bodyParser.json(),
 ]);
 //app.use('*',middleware);
 
+
+
 app.use('/',homeRoutes);
 app.use('/db',dbRoutes);
 app.use("/products",productRoutes);

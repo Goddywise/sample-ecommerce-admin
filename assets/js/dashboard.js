@@ -19,7 +19,7 @@ const showMenu =(menuLink,content)=>{
  })
 //   console.log(menuLink);
 //   console.log(content);
-//what the below if statement means-- if type of string which is pointing to     where the function is called, i.e --- 'overview-link', is a string data type--
+//what the below if statement means-- if type of string which is pointing to where the function is called, i.e --- 'overview-link', is a string data type--
  let menu;
  if(typeof menuLink === 'string'){
     menu = document.querySelector(`.${menuLink}`);
@@ -48,7 +48,7 @@ const validateInputs=(vals,msgs) =>{
     if(!status) {
       alert(msg);
     }
-    return status;
+    return status;  
 }
 
 const handleAddProduct = async (e)=>{

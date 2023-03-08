@@ -25,7 +25,7 @@ class Schema{
         this.dropTables = dropTables;
     }
     CreateTables = ()=>{
-        let sql = '';
+        let sql = ''; 
         let finalResult = ``;
                 if(this.dropTables){
                  return new Promise((resolve,reject)=>{
