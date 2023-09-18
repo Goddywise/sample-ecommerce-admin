@@ -10,7 +10,6 @@ body{
 main{
     display: flex;
 }
-
 aside{
     width:250px;
     display:flex;
@@ -96,9 +95,7 @@ aside > div:last-child{
     height: 15px;
     content: "";
     left: 0;
- 
 }
- 
 .top-aside > div:nth-child(2) > div > *:hover{
     border-color:#e5e5e5;
 }
@@ -148,4 +145,32 @@ aside > div:last-child{
     background-color: white;
     color: black;
     font-weight: bold;
+}
+.content{
+    padding:20px;
+}
+.switch{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    padding:20px;
+}
+
+.switch > div:nth-child(1){
+    display: flex;
+    gap:30px;
+}
+.switch > div:nth-child(1) > span{
+    padding:10px 20px;
+    border:1px solid grey;
+    cursor: pointer;
+    border-radius: 3px;
+}
+.switch > div:nth-child(1) > span:hover{
+    color:#fff;
+    background-color: grey;
+}
+.high-light-sub{
+    color:#fff !important;
+    background-color: grey !important;
 }

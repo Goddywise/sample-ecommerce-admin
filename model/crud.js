@@ -15,7 +15,7 @@ class Crud{
             // database:process.env.DATABASE,
             database:'firstdb',
             // port:process.env.DB_PORT,
-            port:'3308',
+            port:'3300',
             // connectionLimit: process.env.CONNECTIONLIMIT,
             connectionLimit:50,
         });
@@ -24,10 +24,9 @@ class Crud{
     ReadAll = (tble)=>{
         let sql = '';
         let result;
-        //What is the value of ${tble} that we're selecting from----?
-        //SELECT all FROM ${tble} does it exist before--- e.g selecting from table1 while the table1 will be declare at the top----
+ 
         try{
-            let rt  = new Promise((resolve,reject)=>{
+            let rt = new Promise((resolve,reject)=>{
                 this.conn.getConnection(async(err,tempConn)=>{
                     if(err) reject(err);
                     sql = `SELECT * FROM ${tble}`;
@@ -49,12 +48,64 @@ class Crud{
         }
         
     }
+    ReadWithOneField = (obj,table) =>{
+        let sql = '';
+        let result;
+        try{
+            let field = '';
+            for(const key in obj){
+                field = key;
+            } 
+            let rt  = new Promise((resolve,reject)=>{
+                this.conn.getConnection(async(err,tempConn)=>{
+                    if(err) reject(err);
+                    sql = `SELECT * FROM ${table} where ${field} = '${obj[field]}'`;
+                    result = await new Promise((resolve, reject) => {
+                        this.conn.query(sql,(err,data)=>{
+                            if(err) reject(err);
+                            resolve(data);
+                        })
+                    })
+                    resolve(result);
+                     tempConn.release();
+                })
+            })
+            return rt;
+        }
+        catch(e){
+            console.log(e);
+            return e;
+        }
+    }
+    AddNewUser = (obj,table) =>{
+        const {username,password,first_name,last_name,address,secondary_address,phone_number} = obj;
+        return new Promise((resolve,reject)=>{
+            this.conn.getConnection(async (err,tempConn)=>{
+            if(err) reject(err) ;
+            let params;
+            let result;
+            //Remember that array work by indexing----
+            const userData = [username,password,first_name,last_name,address,secondary_address,phone_number];
+            const sql = `INSERT INTO ${table} (username,password,first_name,last_name,address,secondary_address,phone_number) VALUES(?,?,?,?,?,?,?);`;
+            params = userData;
+            result = await new Promise((resolve,reject)=>{
+                this.conn.query(sql,params,(error,data)=>{
+                    if(error) reject(`Error:${error} \n Data not inserted into ${table}, check the error object`);
+                    resolve({id:data.insertId,message:`user registered successfully `})
+                })
+            })
+
+            tempConn.release();
+            resolve(result);            
+         })
+    })
+    }
+    
     GetAdminInfo = (table,username,password)=>{
         let sql = '';
         let result;
-//What is the value of ${table} that we're selecting from----?
         return new Promise((resolve,reject)=>{
-                this.conn.getConnection(async(err,tempConn)=>{
+               this.conn.getConnection(async(err,tempConn)=>{
                 if(err) reject(err);
                 sql = `SELECT username,password FROM ${table} WHERE username='${username}' AND password = '${password}' `;
                 result = await new Promise((resolve,reject)=>{
@@ -83,7 +134,7 @@ class Crud{
                 if(err) reject(err) ;
                 let params;
                 let result;
-                //I thougth array work with index, why productData scattered
+                //Remember that array work by indexing----
                 const productData = [name,price,discount,image,description,'0',total,'0'];
                 const sql = `INSERT INTO ${table} (name,price,discount,image,description,rating,total_left,total_sold) VALUES(?,?,?,?,?,?,?,?);`;
                 params = productData;
@@ -101,6 +152,7 @@ class Crud{
         
 
     }
+
 }
                     
 
