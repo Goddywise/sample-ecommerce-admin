@@ -24,6 +24,7 @@ class Schema{
         });
         this.dropTables = dropTables;
     }
+    
     CreateTables = ()=>{
         let sql = ''; 
         let finalResult = ``;
@@ -113,7 +114,7 @@ class Schema{
                 });
                 finalResult+= result;
 
-                sql = `CREATE TABLE ${table2} (id int AUTO_INCREMENT, username VARCHAR(255), password TEXT, PRIMARY KEY(id))`;
+                sql = `CREATE TABLE ${table2} (id int AUTO_INCREMENT, username VARCHAR(255), password TEXT,first_name VARCHAR(255),last_name VARCHAR(255),address TEXT,secondary_address TEXT,phone_number VARCHAR(255), PRIMARY KEY(id))`;
                 result = await new Promise((resolve,reject)=>{
                     this.conn.query(sql,(err,data)=>{
                         if(err) reject(err);
@@ -122,7 +123,7 @@ class Schema{
                 });
                 finalResult+= result;
 //what's the code that direct us Secting from this below table, since we have many tables---According to readAll > crud.js
-                sql = `CREATE TABLE ${table3} (id int AUTO_INCREMENT,name VARCHAR(255), price int,discount int, image TEXT, description TEXT,rating int, total_left int, total_sold int, PRIMARY KEY(id))`;
+                sql = `CREATE TABLE ${table3} (id int AUTO_INCREMENT,name VARCHAR(255), price int,discount int, image TEXT, description TEXT,rating int, total_left int, total_sold int,category VARCHAR(255),keywords TEXT, PRIMARY KEY(id))`;
                 result = await new Promise((resolve,reject)=>{
                     this.conn.query(sql,(err,data)=>{
                         if(err) reject(err);
@@ -153,20 +154,23 @@ class Schema{
                 params = adminData;
                 result = await new Promise((resolve,reject)=>{
                     this.conn.query(sql,params,(error,data)=>{
-                        if(error) reject(`Data not inserted into ${table1}, check the error object`);
+                        if(error) 
+                            reject(`Data not inserted into ${table1}, 
+                            check the error object`);
+                        
                         resolve(`Data inserted into ${table1} successfully `)
                     })
                 })
                 finalResult+= result;
 
                 const productData = [
-                    ['Six Pairs-in-1 Quality Ankle Socks','5200','2','item-1.jpg','Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis amet nemo tempore quo perspiciatis minus repellendus excepturi harum. Non repudiandae tempora dicta ipsam exercitationem tempore sapiente, odit rem? Voluptatem, fugiat. Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis amet nemo tempore quo perspiciatis minus repellendus excepturi harum. Non repudiandae tempora dicta ipsam exercitationem tempore sapiente, odit rem? Voluptatem, fugiat. Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis amet nemo tempore quo perspiciatis minus repellendus excepturi harum. Non repudiandae tempora dicta ipsam exercitationem tempore sapiente, odit rem? Voluptatem, fugiat.','4','5000','2000'],
+                    ['Six Pairs-in-1 Quality Ankle Socks','5200','2','item-1.jpg','Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis amet nemo tempore quo perspiciatis minus repellendus excepturi harum. Non repudiandae tempora dicta ipsam exercitationem tempore sapiente, odit rem? Voluptatem, fugiat. Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis amet nemo tempore quo perspiciatis minus repellendus excepturi harum. Non repudiandae tempora dicta ipsam exercitationem tempore sapiente, odit rem? Voluptatem, fugiat. Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis amet nemo tempore quo perspiciatis minus repellendus excepturi harum. Non repudiandae tempora dicta ipsam exercitationem tempore sapiente, odit rem? Voluptatem, fugiat.','4','5000','2000','fashion','socks, sock'],
 
-                    ['Biore UV Aqua Rich Watery Essence Sunscreen SPF 50 (50ml)','3400','1','item-2.jp','Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis amet nemo tempore quo perspiciatis minus repellendus excepturi harum. Non repudiandae tempora dicta ipsam exercitationem tempore sapiente, odit rem? Voluptatem, fugiat. Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis amet nemo tempore quo perspiciatis minus repellendus excepturi harum. Non repudiandae tempora dicta ipsam exercitationem tempore sapiente, odit rem? Voluptatem, fugiat.','4','5000','1700'],
+                    ['Biore UV Aqua Rich Watery Essence Sunscreen SPF 50 (50ml)','3400','1','item-2.jp','Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis amet nemo tempore quo perspiciatis minus repellendus excepturi harum. Non repudiandae tempora dicta ipsam exercitationem tempore sapiente, odit rem? Voluptatem, fugiat. Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis amet nemo tempore quo perspiciatis minus repellendus excepturi harum. Non repudiandae tempora dicta ipsam exercitationem tempore sapiente, odit rem? Voluptatem, fugiat.','4','5000','1700','health and beauty, fashion,','sunscreen'],
                     
-                    ['1000 mAH power bank','12000','1','item-3.jpg','Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis amet nemo tempore quo perspiciatis minus repellendus excepturi harum. Non repudiandae tempora dicta ipsam exercitationem tempore sapiente, odit rem? Voluptatem, fugiat. Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis amet nemo tempore quo perspiciatis minus repellendus excepturi harum. Non repudiandae tempora dicta ipsam exercitationem tempore sapiente, odit rem? Voluptatem, fugiat.','4','5000','2340'],
+                    ['1000 mAH power bank','12000','1','item-3.jpg','Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis amet nemo tempore quo perspiciatis minus repellendus excepturi harum. Non repudiandae tempora dicta ipsam exercitationem tempore sapiente, odit rem? Voluptatem, fugiat. Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis amet nemo tempore quo perspiciatis minus repellendus excepturi harum. Non repudiandae tempora dicta ipsam exercitationem tempore sapiente, odit rem? Voluptatem, fugiat.','4','5000','2340','computing, electronics, phones and tablets, home and office','power bank, power banks'],
 
-                    ['Wrist watch and Wrist band','5400','2','item-6.jpg','Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis amet nemo tempore quo perspiciatis minus repellendus excepturi harum. Non repudiandae tempora dicta ipsam exercitationem tempore sapiente, odit rem? Voluptatem, fugiat. Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis amet nemo tempore quo perspiciatis minus repellendus excepturi harum. Non repudiandae tempora dicta ipsam exercitationem tempore sapiente, odit rem? Voluptatem, fugiat','4','5000','3300'],
+                    ['Wrist watch and Wrist band','5400','2','item-6.jpg','Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis amet nemo tempore quo perspiciatis minus repellendus excepturi harum. Non repudiandae tempora dicta ipsam exercitationem tempore sapiente, odit rem? Voluptatem, fugiat. Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis amet nemo tempore quo perspiciatis minus repellendus excepturi harum. Non repudiandae tempora dicta ipsam exercitationem tempore sapiente, odit rem? Voluptatem, fugiat','4','5000','3300','fashion, fashion'],
 
                     ['62GB flash drive','5400','2','item-4.jpg','Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis amet nemo tempore quo perspiciatis minus repellendus excepturi harum. Non repudiandae tempora dicta ipsam exercitationem tempore sapiente, odit rem? Voluptatem, fugiat. Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis amet nemo tempore quo perspiciatis minus repellendus excepturi harum. Non repudiandae tempora dicta ipsam exercitationem tempore sapiente, odit rem? Voluptatem, fugiat','4','3000','3000'],
                     
@@ -191,11 +195,15 @@ class Schema{
                     ['Short wear','10000','15','item-19.jpg','Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis amet nemo tempore quo perspiciatis minus repellendus excepturi harum,Blanditiis amet nemo tempore quo perspiciatis minus repellendus excepturi harum.','3','200','100']
                 ];
 
-                sql = `INSERT INTO ${table3} (name,price,discount,image,description,rating,total_left,total_sold) VALUES ?;`;
+                sql = `INSERT INTO ${table3}
+                    (name,price,discount,image,description,rating,
+                        total_left,total_sold,category,keywords) VALUES ?;`;
                 params = productData;
                 result = await new Promise((resolve,reject)=>{
                     this.conn.query(sql,[params],(error,data)=>{
-                        if(error) reject(`Data not inserted into ${table3}, check the error object`);
+                        if(error) 
+                        reject(`Data not inserted into ${table3},
+                         check the error object`);
                         resolve(`Data inserted into ${table3} successfully `)
                     })
                 })

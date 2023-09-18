@@ -13,62 +13,108 @@
             <div>
                 <h3>WELCOME</h3>
                 <div>
-                    <a class="menu overview-link" onclick="showMenu(this,'.overview')"> <i class="bi-app"></i> Overview</a>
-                    <a class="menu product-link" onclick="showMenu(this,'.products')"> <i class="bi-gift" > </i> Products</a>
-                    <a class="menu order-link" onclick="showMenu(this,'.order')"> <i class="bi-cart cart-link">  </i> Order</a>
-                    <a class="menu search-link"onclick="showMenu(this,'.search')"> <i class="bi-search"> </i> Search</a>
+                    <a class="menu overview-link" onclick="showMenu(this,'.overview')"> 
+                        <i class="bi-app"></i> Overview
+                    </a>
+                    <a class="menu product-link" onclick="showMenu(this,'.products')"> 
+                        <i class="bi-gift" > </i> Products
+                    </a>
+                    <a class="menu order-link" onclick="showMenu(this,'.order')"> 
+                        <i class="bi-cart cart-link">  </i> Order
+                    </a>
+                    <a class="menu search-link"onclick="showMenu(this,'.search')"> 
+                        <i class="bi-search"> </i> Search
+                    </a>
                 </div>
             </div>
         </div>
-        <div class="bottom-aside">
-           
+        <div class="bottom-aside">   
         </div>
 
     </aside>
     
     <section class="mainContent">
         <div class="subContent">
-            <div class="content  overview">Overview</div>
-            <div class="content products"> 
-                <h1>Add product</h1>
-                <form onsubmit="return handleAddProduct(event)" enctype="multipart/form-data">
-                    <label>
-                        Product Name<br/>
-                        <input required type="text" name="name" id="name" placeholder=""/>
-                        <br/><br/>
-                    </label>
-                    <label >
-                        Price<br/>
-                        <input required type="number" id="price"/>
-                        <br/><br/>
-                    </label>
-                    <label>
-                        Description<br/>
-                        <textarea required name="description" id="description" placeholder="Enter Product Description"></textarea>
-                        <br/><br/>
-                    </label>
-                    <label>
-                        Discount<br/>
-                        <input type="number" id="discount"/>
-                        <br/><br/>
-                    </label>
-                    <div>
-                        <img />
-                    </div>
-                    <label>
-                        Select File<br/>
-                        <input required type="file" accept="image/*" id="image" name="image"/>
-                        <br/><br/>
-                    </label>
-                    <label>
-                        Total Number of product to add <br/>
-                        <input required type="number" id="total" name=""/>
-                        <br/><br/>
-                    </label>
-                    <button id="submit" type="submit">Upload</button>
-                </form>
+            <div class="content  overview">
+                <div>Overview content</div>
             </div>
-            <div class="content  order">Order</div>
+            <!-- This is where products started -->
+            <div class="content products switch"> 
+                <div>
+                    <span onclick="showSubMenu('.add-product','.products')" 
+                    class="add-product">Add Product</span>
+
+                    <span onclick="showSubMenu('.view-product','.products')" 
+                    class="view-product">View Product</span>
+
+                </div>
+                <!-- Below is (`${content} > div:nth-child(2) > div`);  here's display none-->
+                <div>
+                    <div class="add-product-div">
+                        <form 
+                            onsubmit="return handleAddProduct(event)"
+                            enctype="multipart/form-data"   
+                        >
+                            <label>
+                                Product Name<br/>
+                                <input required type="text" 
+                                    name="name" id="name" placeholder=""
+                                />
+                                <br/><br/>
+                            </label>
+                            <label >
+                                Price<br/>
+                                <input required type="number" id="price"/>
+                                <br/><br/>
+                            </label>
+                            <label>
+                                Description<br/>
+                                <textarea required name="description" 
+                                    id="description" 
+                                    placeholder="Enter Product Description"
+                                ></textarea>
+                                <br/><br/>
+                            </label>
+                            <label>
+                                Discount<br/>
+                                <input type="number" id="discount"/>
+                                <br/><br/>
+                            </label>
+                            <div>
+                                <img />
+                            </div>
+                            <label>
+                                Select File<br/>
+                                <input required type="file" accept="image/*"
+                                    id="image" name="image"/>
+                                <br/><br/>
+                            </label>
+                            <label>
+                                Total Number of product to add <br/>
+                                <input required type="number" id="total" name=""/>
+                                <br/><br/>
+                            </label>
+                            <button id="submit" type="submit">Upload</button>
+                        </form>  
+                    </div>
+                    
+                    <div class="view-product-div">
+                        view product content
+                    </div>
+                </div>
+               
+            </div>
+            <!-- This is where Order starts-----/ -->
+            <div class="content order switch">
+                <div>
+                    <span class="all-order" onclick="showSubMenu('.all-order','.order')">All Order</span>
+                    <span class="f-order" onclick="showSubMenu('.f-order','.order')">Fulfilled Order</span>
+                </div>
+                <div>
+                    <div class="all-order-div">all order content</div>
+                    <div class="f-order-div">Fulfilled order content</div>
+                </div>
+            </div>
             <div class="content search">Search</div>
         </div>
         
